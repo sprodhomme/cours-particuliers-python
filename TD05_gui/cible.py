@@ -14,3 +14,5 @@ canvas.create_oval( x, y, x+250, y+250, fill="green")
 
 canvas.grid()
 root.mainloop()
+
+# Lien : https://stackoverflow.com/questions/17985216/simpler-way-to-draw-a-circle-with-tkinter
