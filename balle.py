@@ -37,32 +37,24 @@ def mouvement():
     """Déplace la balle et ré-appelle la fonction avec un compte-à-rebours"""
     rebond()
     canvas.move(balle[0], balle[1], balle[2])
+    canvas.move(carre[0], carre[1], carre[2])
     canvas.after(20, mouvement)
 
 
 def rebond():
-    """Fait rebondir la balle sur les bords du canevas"""
+    """Fait rebondir la balle et le carré sur les bords du canevas"""
     global balle
+    global carre
+    global cpt1
+    
     x0, y0, x1, y1 = canvas.coords(balle[0])
     if x0 <= 0 or x1 >= 600:
         balle[1] = -balle[1]
-    if y0 <= 0 or y1 >= 400:
-        balle[2] = -balle[2]
-
-def mouvement2():
-    rebond2()
-    canvas.move(carré[0], carré[1], carré[2])
-    canvas.after(20, mouvement2)
-
-def rebond2():
-    global carre
-    global cpt1 
-    z0, w0, z1, w1 = canvas.coords(carre[0])
-    if z0 <= 0 or z1 >= 600:
         carre[1] = -carre[1]
         cpt1 = cpt1 + 1
         print(cpt1)
-    if w0 <= 0 or w1 >= 400:
+    if y0 <= 0 or y1 >= 400:
+        balle[2] = -balle[2]
         carre[2] = -carre[2]
         cpt1 = cpt1 + 1
         print(cpt1)
@@ -72,7 +64,6 @@ def rebond2():
         
     if cpt1 % 10 == 0:
         canvas.itemconfigure(carre[0], fill="black")
-
 
 ######################
 # programme principal
@@ -86,9 +77,8 @@ canvas.grid()
 
 carre = creer_carre()
 balle = creer_balle()
-# déplacement de la balle
+# déplacement de la balle et du carré ensemble
 mouvement()
-mouvement2()
 
 # alternance balle / rectangle
 
