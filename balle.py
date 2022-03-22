@@ -5,7 +5,7 @@ import tkinter as tk
 
 LARGEUR = 600
 HAUTEUR = 400
-rebond_compte = 0
+
 
 ###################
 # Fonctions
@@ -21,7 +21,6 @@ def creer_balle():
                                 fill="blue")
     return [cercle, dx, dy]
 
-
 def mouvement():
     """Déplace la balle et ré-appelle la fonction avec un compte-à-rebours"""
     rebond()
@@ -32,21 +31,42 @@ def mouvement():
 def rebond():
     """Fait rebondir la balle sur les bords du canevas"""
     global balle
-    global rebond_compte
-    rectangle = canvas.create_rectangle(50, 50, 50, 50, fill="blue")
     x0, y0, x1, y1 = canvas.coords(balle[0])
     if x0 <= 0 or x1 >= 600:
         balle[1] = -balle[1]
-        rebond_compte = rebond_compte + 1
-        print(rebond_compte)
     if y0 <= 0 or y1 >= 400:
         balle[2] = -balle[2]
-        rebond_compte = rebond_compte + 1
-        print(rebond_compte)
-    if rebond_compte % 5 == 0:
-        canvas.itemconfigure(balle[0], fill="yellow")
+
+def creer_carré():
+    """Dessine un disque bleu et retourne son identifiant
+     et les valeurs de déplacements dans une liste"""
+    x, y = LARGEUR // 2, HAUTEUR // 2
+    dx, dy = 3, 5
+    rayon = 20
+    rectangle = canvas.create_rectangle((x-rayon, y-rayon),
+                                (x+rayon, y+rayon),
+                                fill="red")
+    return [rectangle, dx, dy]
+
+def mouvement2():
+    rebond2()
+    canvas.move(carré[0], carré[1], carré[2])
+    canvas.after(20, mouvement2)
+
+def rebond2():
+    global carré
+    cpt1 = 0
+    z0, w0, z1, w1 = canvas.coords(carré[0])
+    if z0 <= 0 or z1 >= 600:
+        carré[1] = -carré[1]
+        cpt1 = cpt1 + 1
+    if w0 <= 0 or w1 >= 400:
+        carré[2] = -carré[2]
+        cpt1 = cpt1 + 1
+    if cpt1 % 5 == 0:
+        canvas.itemconfigure(balle[0], fill="black")
         
-    if rebond_compte % 10 == 0:
+    if cpt1 % 10 == 0:
         canvas.itemconfigure(balle[0], fill="blue")
 
 
@@ -59,10 +79,15 @@ canvas = tk.Canvas(racine, bg="black", width=LARGEUR, height=HAUTEUR)
 canvas.grid()
 
 # initialisation de la balle
-balle = creer_balle()
 
+carré = creer_carré()
+balle = creer_balle()
 # déplacement de la balle
 mouvement()
+mouvement2()
+
+# alternance balle / rectangle
+
 
 # boucle principale
 racine.mainloop()
