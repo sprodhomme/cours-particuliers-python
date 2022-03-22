@@ -22,7 +22,7 @@ def creer_balle():
                                 fill="blue", width=0)
     return [cercle, dx, dy]
 
-def creer_carré():
+def creer_carre():
     """Dessine un disque bleu et retourne son identifiant
      et les valeurs de déplacements dans une liste"""
     x, y = LARGEUR // 2, HAUTEUR // 2
@@ -55,23 +55,23 @@ def mouvement2():
     canvas.after(20, mouvement2)
 
 def rebond2():
-    global carré
+    global carre
     global cpt1 
-    z0, w0, z1, w1 = canvas.coords(carré[0])
+    z0, w0, z1, w1 = canvas.coords(carre[0])
     if z0 <= 0 or z1 >= 600:
-        carré[1] = -carré[1]
+        carre[1] = -carre[1]
         cpt1 = cpt1 + 1
         print(cpt1)
     if w0 <= 0 or w1 >= 400:
-        carré[2] = -carré[2]
+        carre[2] = -carre[2]
         cpt1 = cpt1 + 1
         print(cpt1)
     
     if cpt1 % 5 == 0:
-        canvas.itemconfigure(carré[0], fill="blue")
+        canvas.itemconfigure(carre[0], fill="blue")
         
     if cpt1 % 10 == 0:
-        canvas.itemconfigure(carré[0], fill="black")
+        canvas.itemconfigure(carre[0], fill="black")
 
 
 ######################
@@ -84,7 +84,7 @@ canvas.grid()
 
 # initialisation de la balle
 
-carré = creer_carré()
+carre = creer_carre()
 balle = creer_balle()
 # déplacement de la balle
 mouvement()
