@@ -5,6 +5,7 @@ import tkinter as tk
 
 LARGEUR = 600
 HAUTEUR = 400
+cpt1 = 0
 
 
 ###################
@@ -55,19 +56,22 @@ def mouvement2():
 
 def rebond2():
     global carré
-    cpt1 = 0
+    global cpt1 
     z0, w0, z1, w1 = canvas.coords(carré[0])
     if z0 <= 0 or z1 >= 600:
         carré[1] = -carré[1]
         cpt1 = cpt1 + 1
+        print(cpt1)
     if w0 <= 0 or w1 >= 400:
         carré[2] = -carré[2]
         cpt1 = cpt1 + 1
+        print(cpt1)
+    
     if cpt1 % 5 == 0:
-        canvas.itemconfigure(balle[0], fill="black")
+        canvas.itemconfigure(carré[0], fill="black")
         
     if cpt1 % 10 == 0:
-        canvas.itemconfigure(balle[0], fill="blue")
+        canvas.itemconfigure(carré[0], fill="blue")
 
 
 ######################
