@@ -22,6 +22,17 @@ def creer_balle():
                                 fill="blue", width=0)
     return [cercle, dx, dy]
 
+def creer_carré():
+    """Dessine un disque bleu et retourne son identifiant
+     et les valeurs de déplacements dans une liste"""
+    x, y = LARGEUR // 2, HAUTEUR // 2
+    dx, dy = 3, 5
+    rayon = 20
+    rectangle = canvas.create_rectangle((x-rayon, y-rayon),
+                                (x+rayon, y+rayon),
+                                fill="red")
+    return [rectangle, dx, dy]
+
 def mouvement():
     """Déplace la balle et ré-appelle la fonction avec un compte-à-rebours"""
     rebond()
@@ -37,17 +48,6 @@ def rebond():
         balle[1] = -balle[1]
     if y0 <= 0 or y1 >= 400:
         balle[2] = -balle[2]
-
-def creer_carré():
-    """Dessine un disque bleu et retourne son identifiant
-     et les valeurs de déplacements dans une liste"""
-    x, y = LARGEUR // 2, HAUTEUR // 2
-    dx, dy = 3, 5
-    rayon = 20
-    rectangle = canvas.create_rectangle((x-rayon, y-rayon),
-                                (x+rayon, y+rayon),
-                                fill="red")
-    return [rectangle, dx, dy]
 
 def mouvement2():
     rebond2()
