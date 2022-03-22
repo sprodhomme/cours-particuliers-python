@@ -19,7 +19,7 @@ def creer_balle():
     rayon = 20
     cercle = canvas.create_oval((x-rayon, y-rayon),
                                 (x+rayon, y+rayon),
-                                fill="blue")
+                                fill="blue", width=0)
     return [cercle, dx, dy]
 
 def mouvement():
@@ -68,10 +68,10 @@ def rebond2():
         print(cpt1)
     
     if cpt1 % 5 == 0:
-        canvas.itemconfigure(carré[0], fill="black")
+        canvas.itemconfigure(carré[0], fill="blue")
         
     if cpt1 % 10 == 0:
-        canvas.itemconfigure(carré[0], fill="blue")
+        canvas.itemconfigure(carré[0], fill="black")
 
 
 ######################
